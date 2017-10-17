@@ -1,14 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
+import { HttpInMemoryWebApiModule } from 'in-memory-web-api';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './app-login/app-login.component';
 import { RegisterComponent } from './app-register/app-register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DataService } from './data-service';
+import { InMemUserService } from './inMemoryDatabase.service';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -28,9 +30,10 @@ const appRoutes: Routes = [
     RouterModule.forRoot(
       appRoutes,
     ),
+    HttpInMemoryWebApiModule.forRoot(InMemUserService),
     BrowserModule,
     FormsModule,
-    HttpClientModule,
+    HttpModule,
     RouterModule
   ],
   providers: [DataService],
