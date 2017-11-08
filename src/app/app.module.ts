@@ -1,21 +1,25 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
-import { HttpInMemoryWebApiModule } from 'in-memory-web-api';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatFormFieldModule, MatTableModule, MatPaginatorModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
-import { LoginComponent } from './app-login/app-login.component';
-import { RegisterComponent } from './app-register/app-register.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { DataService } from './data-service';
-import { InMemUserService } from './inMemoryDatabase.service';
+import { MenuComponent } from './menu/menu.component';
+import { MainComponent } from './main/main.component';
+import { InstRegisterComponent } from './inst-register/inst-register.component';
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full'},
+  { path: '', redirectTo: '/', pathMatch: 'full'},
+  { path: '', component: MainComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'inst-register', component: InstRegisterComponent },
   { path: 'dashboard', component: DashboardComponent }
 ];
 
@@ -24,19 +28,26 @@ const appRoutes: Routes = [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    DashboardComponent
+    DashboardComponent,
+    MenuComponent,
+    MainComponent,
+    InstRegisterComponent
   ],
   imports: [
     RouterModule.forRoot(
       appRoutes,
     ),
-    HttpInMemoryWebApiModule.forRoot(InMemUserService),
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatTableModule,
+    MatPaginatorModule
   ],
-  providers: [DataService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
